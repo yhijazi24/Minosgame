@@ -198,23 +198,30 @@ bool dominos_init(Game* game, int num_players, ConfigurationJoueurs* config) {
 }
 
 
-
-
 void dominos_cleanup(Game* game) {
-    if (dominos_state.player_hand) {
-        free(dominos_state.player_hand);
-        dominos_state.player_hand = NULL;
+    DominosGame* dominos_state = get_dominos_game_state();
+
+    if (!dominos_state) return; 
+
+    if (dominos_state->player_hand) {
+        free(dominos_state->player_hand);
+        dominos_state->player_hand = NULL;
     }
-    if (dominos_state.opponent_hand) {
-        free(dominos_state.opponent_hand);
-        dominos_state.opponent_hand = NULL;
+
+    #ifdef DYNAMIC_PLACED_DOMINOS
+    if (dominos_state->placed_dominos) {
+        free(dominos_state->placed_dominos);
+        dominos_state->placed_dominos = NULL; 
     }
-    if (dominos_state.deck) {
-        free(dominos_state.deck);
-        dominos_state.deck = NULL;
+    #endif
+    if (dominos_state->opponent_hand) {
+        free(dominos_state->opponent_hand);
+        dominos_state->opponent_hand = NULL;
     }
-    cleanup_dominos_renderer(game);
+    free(dominos_state);
 }
+
+
 
 DominosGame* get_dominos_game_state(void) {
     return &dominos_state;

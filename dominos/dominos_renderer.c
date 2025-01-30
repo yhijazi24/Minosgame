@@ -146,8 +146,21 @@ void render_order_player(DominosGame* dominos_game, Game* game) {
     for (int i = 0; i < dominos_game->nbr_joueurs; i++) {
         int player_index = dominos_game->ordre_joueurs[i];
 
-        char affichage[50];
-        snprintf(affichage, sizeof(affichage), "%d. %s", i + 1, dominos_game->noms_joueurs[player_index]);
+
+    if (player_index < 0 || player_index >= dominos_game->nbr_joueurs) {
+        continue; 
+    }
+
+    if (dominos_game->noms_joueurs[player_index] == NULL) {
+        printf("Error: Player %d has no name assigned!\n", player_index);
+        continue;
+    }
+
+    // ✅ Declare `affichage` here
+    char affichage[50];
+
+    snprintf(affichage, sizeof(affichage), "%d. %s", i + 1, dominos_game->noms_joueurs[player_index]);
+
 
         surface = TTF_RenderText_Blended(font, affichage, textColor);
         if (!surface) {
