@@ -1,0 +1,3 @@
+/home/kamir/Téléchargements/Minosgame-main/CMakeFiles/rebuild_cache.dir
+/home/kamir/Téléchargements/Minosgame-main/CMakeFiles/edit_cache.dir
+/home/kamir/Téléchargements/Minosgame-main/CMakeFiles/Minosgames.dir
